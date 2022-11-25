@@ -1,0 +1,11 @@
+/target
+/tests
+**/*.rs.bk
+Cargo.lock
+bin/
+
+wasm-pack.log
+.appveyor.yml
+LICENSE_APACHE
+LICENSE_MIT
+README.md

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Wasm Sign</title>
+    <style>
+        .center {
+            width: 100%;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="center">
+        <div>
+            <span>Data: </span>
+            <input type="text" id="dataInput" size="100" />
+        </div>
+
+        <div>
+            <span>Sign: </span>
+            <input type="text" readonly disabled="disabled" id="dataOutput" size="100" />
+        </div>
+
+        <input type="button" value="Get Sign" onclick="genSign();" />
+    </div>
+
+    <script type="module">
+
+        // window.buffer2str = function(hashBuffer) {
+        //     const hashArray = Array.from(new Uint8Array(hashBuffer));
+        //     const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+        //     return hashHex;
+        // }
+        import { default as wasm, sign } from "./pkg/wasm_digest.js";
+        await wasm();
+
+        let dataInput = document.getElementById("dataInput");
+        let dataOutput = document.getElementById("dataOutput");
+        window.genSign = function () {
+            let data = dataInput.value;
+            sign(data).then(sign => dataOutput.value = sign);
+        }
+        
+    </script>
+</body>
+
+</html>
